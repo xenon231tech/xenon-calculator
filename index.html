@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xenon Calculator</title>
+    <meta name="description" content="Kalkulator modern dengan operasi dasar dan advanced mathematics">
+    <meta property="og:title" content="Xenon Calculator">
+    <meta property="og:description" content="Kalkulator modern dengan operasi dasar dan advanced mathematics">
+    <meta property="og:type" content="website">
+    <title>Xenon Calculator - Advanced Calculator</title>
     <style>
         * {
             margin: 0;
@@ -11,110 +15,398 @@
             box-sizing: border-box;
         }
         
+        :root {
+            --color1: #fa709a;
+            --color2: #fee140;
+            --accent: #ffd700;
+            --dark-bg: #0a0e27;
+            --light-bg: #f8f9fa;
+            --text-dark: #1a1a2e;
+            --text-light: #ffffff;
+        }
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            color: #fff;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1a1a3e 50%, var(--dark-bg) 100%);
+            color: var(--text-light);
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+            overflow-x: hidden;
+            transition: background 0.3s ease;
         }
         
-        .container {
-            max-width: 800px;
+        body.light-mode {
+            background: linear-gradient(135deg, var(--light-bg) 0%, #ffffff 50%, #f0f0f0 100%);
+            color: var(--text-dark);
+        }
+        
+        /* Animated background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 60px 40px;
-            text-align: center;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            height: 100%;
+            background: linear-gradient(45deg, var(--color1), var(--color2), var(--color1));
+            background-size: 300% 300%;
+            animation: gradientShift 15s ease infinite;
+            opacity: 0.05;
+            z-index: -1;
         }
         
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Particle effect */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: float 20s infinite;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+        
+        /* Header */
+        header {
+            position: relative;
+            z-index: 10;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--color1), var(--color2));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         
-        p {
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-light);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+        
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+        
+        body.light-mode .theme-toggle {
+            color: var(--text-dark);
+        }
+        
+        /* Main container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 40px;
+            position: relative;
+            z-index: 5;
+        }
+        
+        /* Hero section */
+        .hero {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: slideInDown 0.8s ease;
+        }
+        
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .icon-large {
+            font-size: 4em;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--color1), var(--color2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+        
+        .subtitle {
+            font-size: 1.5em;
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .description {
             font-size: 1.1em;
-            margin-bottom: 30px;
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin: 0 auto 40px;
             line-height: 1.6;
         }
         
-        .badge {
-            display: inline-block;
-            background: rgba(102, 126, 234, 0.2);
-            border: 1px solid #667eea;
-            color: #667eea;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            margin-bottom: 30px;
+        body.light-mode .description {
+            color: rgba(0, 0, 0, 0.6);
         }
         
+        /* Features section */
+        .features {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            animation: slideInUp 0.8s ease 0.2s both;
+        }
+        
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        body.light-mode .features {
+            background: rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .features h2 {
+            margin-bottom: 30px;
+            font-size: 1.8em;
+            color: var(--accent);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+        
+        body.light-mode .feature-item {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        
+        body.light-mode .feature-item:hover {
+            background: rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        /* Stats section */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        body.light-mode .stat-card {
+            background: rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        body.light-mode .stat-label {
+            color: rgba(0, 0, 0, 0.6);
+        }
+        
+        /* Buttons */
         .button-group {
             display: flex;
             gap: 15px;
             justify-content: center;
             flex-wrap: wrap;
-            margin-top: 40px;
+            margin-bottom: 40px;
         }
         
         a {
             display: inline-block;
-            padding: 12px 30px;
-            border-radius: 10px;
+            padding: 14px 35px;
+            border-radius: 12px;
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s ease;
             border: 2px solid transparent;
+            cursor: pointer;
         }
         
         .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--color1), var(--color2));
             color: white;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
         
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
         }
         
         .btn-secondary {
-            border: 2px solid #667eea;
-            color: #667eea;
+            border: 2px solid var(--accent);
+            color: var(--accent);
             background: transparent;
         }
         
         .btn-secondary:hover {
-            background: rgba(102, 126, 234, 0.1);
+            background: rgba(255, 255, 255, 0.1);
             transform: translateY(-3px);
         }
         
-        .footer {
-            margin-top: 50px;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9em;
-            color: rgba(255, 255, 255, 0.6);
+        body.light-mode .btn-secondary {
+            color: var(--color1);
+            border-color: var(--color1);
         }
         
-        @media (max-width: 600px) {
+        body.light-mode .btn-secondary:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.95em;
+            position: relative;
+            z-index: 5;
+        }
+        
+        body.light-mode footer {
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            color: rgba(0, 0, 0, 0.6);
+        }
+        
+        footer p {
+            margin: 8px 0;
+        }
+        
+        .credit {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
             h1 {
-                font-size: 1.8em;
+                font-size: 2.5em;
             }
             
             .container {
-                padding: 40px 25px;
+                padding: 40px 20px;
+            }
+            
+            .features {
+                padding: 25px;
             }
             
             .button-group {
@@ -124,24 +416,120 @@
             a {
                 width: 100%;
             }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="animated-bg"></div>
+    <div class="particles" id="particles"></div>
+    
+    <header>
+        <div class="logo">🧮 Xenon Calculator</div>
+        <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark</button>
+    </header>
+    
     <div class="container">
-        <div class="badge">CALCULATOR</div>
-        <h1>Xenon Calculator</h1>
-        <p>Kalkulator sederhana berbasis web</p>
+        <section class="hero">
+            <div class="icon-large">🧮</div>
+            <h1>Xenon Calculator</h1>
+            <div class="subtitle">Advanced Calculator</div>
+            <p class="description">Kalkulator modern dengan operasi dasar dan advanced mathematics</p>
+        </section>
+        
+        <div class="stats" id="stats">
+            <div class="stat-card">
+                <div class="stat-value" id="stars">-</div>
+                <div class="stat-label">Stars</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="forks">-</div>
+                <div class="stat-label">Forks</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="watchers">-</div>
+                <div class="stat-label">Watchers</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="updated">-</div>
+                <div class="stat-label">Last Update</div>
+            </div>
+        </div>
+        
+        <section class="features">
+            <h2>✨ Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-item"><span class="feature-icon">✓</span><span>Basic operations</span></div>
+<div class="feature-item"><span class="feature-icon">✓</span><span>Scientific functions</span></div>
+<div class="feature-item"><span class="feature-icon">✓</span><span>History tracking</span></div>
+<div class="feature-item"><span class="feature-icon">✓</span><span>Responsive design</span></div>
+            </div>
+        </section>
         
         <div class="button-group">
             <a href="https://github.com/xenon231tech/xenon-calculator" class="btn-primary">View on GitHub</a>
             <a href="https://github.com/xenon231tech/xenon-calculator/issues" class="btn-secondary">Report Issue</a>
         </div>
-        
-        <div class="footer">
-            <p>Built by <strong>xenon231tech</strong> | AI Agent Builder & Web3 Enthusiast</p>
-            <p>🚀 Powered by modern web technologies</p>
-        </div>
     </div>
+    
+    <footer>
+        <p>Built by <span class="credit">xenon231tech</span></p>
+        <p>🚀 AI Agent Builder • Web3 Enthusiast • Jakarta, Indonesia</p>
+        <p style="margin-top: 15px; font-size: 0.85em;">© 2024 All rights reserved</p>
+    </footer>
+    
+    <script>
+        // Create particles
+        function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+                container.appendChild(particle);
+            }
+        }
+        
+        // Theme toggle
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            const btn = document.querySelector('.theme-toggle');
+            btn.textContent = document.body.classList.contains('light-mode') ? '☀️ Light' : '🌙 Dark';
+            localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+        }
+        
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+            document.querySelector('.theme-toggle').textContent = '☀️ Light';
+        }
+        
+        // Fetch GitHub stats
+        async function fetchGitHubStats() {
+            try {
+                const response = await fetch('https://api.github.com/repos/xenon231tech/xenon-calculator');
+                const data = await response.json();
+                
+                document.getElementById('stars').textContent = data.stargazers_count || 0;
+                document.getElementById('forks').textContent = data.forks_count || 0;
+                document.getElementById('watchers').textContent = data.watchers_count || 0;
+                
+                const updated = new Date(data.updated_at);
+                const days = Math.floor((new Date() - updated) / (1000 * 60 * 60 * 24));
+                document.getElementById('updated').textContent = days + 'd ago';
+            } catch (error) {
+                console.log('GitHub API error:', error);
+            }
+        }
+        
+        // Initialize
+        createParticles();
+        fetchGitHubStats();
+    </script>
 </body>
 </html>
