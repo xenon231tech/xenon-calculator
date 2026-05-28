@@ -10,298 +10,138 @@
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #fff;
             min-height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             padding: 20px;
         }
-
-        .calculator {
-            background: #1e1e2f;
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            width: 100%;
-            max-width: 400px;
-        }
-
-        .brand {
+            padding: 60px 40px;
             text-align: center;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+        
+        h1 {
+            font-size: 2.5em;
             margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        p {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: rgba(102, 126, 234, 0.2);
+            border: 1px solid #667eea;
             color: #667eea;
-            font-size: 0.9rem;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-bottom: 30px;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        
+        a {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 10px;
+            text-decoration: none;
             font-weight: 600;
-            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
         }
-
-        .display {
-            background: #2d2d42;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            text-align: right;
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
         }
-
-        .display input {
-            width: 100%;
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            border: 2px solid #667eea;
+            color: #667eea;
             background: transparent;
-            border: none;
-            font-size: 2.5rem;
-            color: white;
-            text-align: right;
-            outline: none;
-            font-family: monospace;
         }
-
-        .display .result {
-            font-size: 1rem;
-            color: #888;
-            margin-top: 10px;
-            min-height: 24px;
+        
+        .btn-secondary:hover {
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateY(-3px);
         }
-
-        .buttons {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
+        
+        .footer {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.6);
         }
-
-        button {
-            background: #2d2d42;
-            border: none;
-            padding: 20px;
-            font-size: 1.3rem;
-            font-weight: 600;
-            border-radius: 12px;
-            color: white;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        button:hover {
-            background: #3d3d5a;
-            transform: scale(0.98);
-        }
-
-        button:active {
-            transform: scale(0.95);
-        }
-
-        .operator {
-            background: #f39c12;
-            color: #1e1e2f;
-        }
-
-        .operator:hover {
-            background: #e67e22;
-        }
-
-        .equals {
-            background: #27ae60;
-            grid-column: span 2;
-        }
-
-        .equals:hover {
-            background: #2ecc71;
-        }
-
-        .clear {
-            background: #e74c3c;
-        }
-
-        .clear:hover {
-            background: #c0392b;
-        }
-
-        .zero {
-            grid-column: span 2;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 20px;
-            color: #555;
-            font-size: 0.7rem;
+        
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .container {
+                padding: 40px 25px;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            a {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="calculator">
-        <div class="brand">
-            ⚡ XENON CALCULATOR ⚡
+    <div class="container">
+        <div class="badge">CALCULATOR</div>
+        <h1>Xenon Calculator</h1>
+        <p>Kalkulator sederhana berbasis web</p>
+        
+        <div class="button-group">
+            <a href="https://github.com/xenon231tech/xenon-calculator" class="btn-primary">View on GitHub</a>
+            <a href="https://github.com/xenon231tech/xenon-calculator/issues" class="btn-secondary">Report Issue</a>
         </div>
         
-        <div class="display">
-            <input type="text" id="display" value="0" readonly>
-            <div class="result" id="result"></div>
+        <div class="footer">
+            <p>Built by <strong>xenon231tech</strong> | AI Agent Builder & Web3 Enthusiast</p>
+            <p>🚀 Powered by modern web technologies</p>
         </div>
-        
-        <div class="buttons">
-            <button class="clear" onclick="clearDisplay()">C</button>
-            <button class="operator" onclick="deleteLast()">⌫</button>
-            <button class="operator" onclick="appendOperator('%')">%</button>
-            <button class="operator" onclick="appendOperator('/')">÷</button>
-            
-            <button onclick="appendNumber('7')">7</button>
-            <button onclick="appendNumber('8')">8</button>
-            <button onclick="appendNumber('9')">9</button>
-            <button class="operator" onclick="appendOperator('*')">×</button>
-            
-            <button onclick="appendNumber('4')">4</button>
-            <button onclick="appendNumber('5')">5</button>
-            <button onclick="appendNumber('6')">6</button>
-            <button class="operator" onclick="appendOperator('-')">-</button>
-            
-            <button onclick="appendNumber('1')">1</button>
-            <button onclick="appendNumber('2')">2</button>
-            <button onclick="appendNumber('3')">3</button>
-            <button class="operator" onclick="appendOperator('+')">+</button>
-            
-            <button class="zero" onclick="appendNumber('0')">0</button>
-            <button onclick="appendNumber('.')">.</button>
-            <button class="equals" onclick="calculate()">=</button>
-        </div>
-        
-        <footer>
-            Xenon Calculator | Built with 💜
-        </footer>
     </div>
-
-    <script>
-        let currentInput = '0';
-        let currentOperator = null;
-        let previousInput = null;
-        let waitingForOperand = false;
-
-        const display = document.getElementById('display');
-        const resultDisplay = document.getElementById('result');
-
-        function updateDisplay() {
-            display.value = currentInput;
-        }
-
-        function appendNumber(number) {
-            if (waitingForOperand) {
-                currentInput = number;
-                waitingForOperand = false;
-            } else {
-                if (currentInput === '0' && number !== '.') {
-                    currentInput = number;
-                } else {
-                    currentInput += number;
-                }
-            }
-            updateDisplay();
-            resultDisplay.textContent = '';
-        }
-
-        function appendOperator(operator) {
-            const inputValue = parseFloat(currentInput);
-            
-            if (previousInput !== null && !waitingForOperand) {
-                calculate();
-            }
-            
-            previousInput = inputValue;
-            currentOperator = operator;
-            waitingForOperand = true;
-            resultDisplay.textContent = currentInput + ' ' + getOperatorSymbol(operator);
-        }
-
-        function getOperatorSymbol(operator) {
-            const symbols = {
-                '+': '+',
-                '-': '-',
-                '*': '×',
-                '/': '÷',
-                '%': '%'
-            };
-            return symbols[operator] || operator;
-        }
-
-        function calculate() {
-            if (currentOperator === null || waitingForOperand) return;
-            
-            const secondValue = parseFloat(currentInput);
-            let result = 0;
-            
-            switch (currentOperator) {
-                case '+':
-                    result = previousInput + secondValue;
-                    break;
-                case '-':
-                    result = previousInput - secondValue;
-                    break;
-                case '*':
-                    result = previousInput * secondValue;
-                    break;
-                case '/':
-                    if (secondValue === 0) {
-                        resultDisplay.textContent = 'Error: Tidak bisa dibagi 0!';
-                        clearDisplay();
-                        return;
-                    }
-                    result = previousInput / secondValue;
-                    break;
-                case '%':
-                    result = previousInput % secondValue;
-                    break;
-                default:
-                    return;
-            }
-            
-            result = Math.round(result * 1000000) / 1000000;
-            
-            resultDisplay.textContent = previousInput + ' ' + getOperatorSymbol(currentOperator) + ' ' + secondValue + ' =';
-            currentInput = result.toString();
-            currentOperator = null;
-            previousInput = null;
-            waitingForOperand = true;
-            updateDisplay();
-        }
-
-        function clearDisplay() {
-            currentInput = '0';
-            currentOperator = null;
-            previousInput = null;
-            waitingForOperand = false;
-            updateDisplay();
-            resultDisplay.textContent = '';
-        }
-
-        function deleteLast() {
-            if (currentInput.length === 1 || (currentInput === '0')) {
-                currentInput = '0';
-            } else {
-                currentInput = currentInput.slice(0, -1);
-            }
-            updateDisplay();
-        }
-
-        document.addEventListener('keydown', function(event) {
-            const key = event.key;
-            
-            if (key >= '0' && key <= '9') {
-                appendNumber(key);
-            } else if (key === '.') {
-                appendNumber('.');
-            } else if (key === '+' || key === '-' || key === '*' || key === '/') {
-                appendOperator(key);
-            } else if (key === '%') {
-                appendOperator('%');
-            } else if (key === 'Enter' || key === '=') {
-                calculate();
-            } else if (key === 'Escape') {
-                clearDisplay();
-            } else if (key === 'Backspace') {
-                deleteLast();
-            }
-        });
-    </script>
 </body>
 </html>
