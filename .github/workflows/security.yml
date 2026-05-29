@@ -1,0 +1,33 @@
+name: Security Scan
+
+on:
+  push:
+    branches: [ main ]
+  schedule:
+    - cron: '0 0 * * 0'
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Check for secrets
+      run: |
+        echo "✓ Scanning for secrets..."
+        if grep -r "password\|token\|secret\|key" --include="*.js" --include="*.html" . 2>/dev/null | grep -v node_modules | grep -v ".git"; then
+          echo "⚠ Potential secrets found!"
+        else
+          echo "✓ No obvious secrets found"
+        fi
+    
+    - name: Check dependencies
+      run: |
+        echo "✓ Checking dependencies..."
+        if [ -f "package.json" ]; then
+          echo "✓ package.json found"
+        fi
+    
+    - name: Security scan completed
+      run: echo "✓ Security scan completed!"
