@@ -3,132 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Advanced calculator with scientific functions and history">
-    <meta name="keywords" content="calculator, math, scientific, computation">
-    <meta name="author" content="xenon231tech">
-    <meta property="og:title" content="Xenon Calculator">
-    <meta property="og:description" content="Advanced calculator with scientific functions and history">
-    <meta property="og:type" content="website">
-    <title>Xenon Calculator - Xenon Project</title>
+    <title>Xenon Calculator</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        :root {
-            --primary-color: #f59e0b;
-            --primary-rgb: 245, 158, 11;
-        }
-    </style>
 </head>
 <body>
-    <header class="navbar">
-        <div class="container">
-            <div class="navbar-brand">
-                <span class="project-icon">🧮</span>
-                <h1>Xenon Calculator</h1>
+    <div class="calc-container">
+        <h1>🧮 Xenon Calculator</h1>
+        <div class="calculator">
+            <div class="display">
+                <input type="text" id="display" readonly>
             </div>
-            <nav class="navbar-menu">
-                <a href="#features">Features</a>
-                <a href="#about">About</a>
-                <a href="https://github.com/xenon231tech/xenon-calculator" target="_blank">GitHub</a>
-            </nav>
+            <div class="buttons">
+                <button onclick="clearDisplay()">C</button>
+                <button onclick="appendOperator('/')">/</button>
+                <button onclick="appendOperator('*')">×</button>
+                <button onclick="deleteLast()">⌫</button>
+                
+                <button onclick="appendNumber('7')">7</button>
+                <button onclick="appendNumber('8')">8</button>
+                <button onclick="appendNumber('9')">9</button>
+                <button onclick="appendOperator('-')">−</button>
+                
+                <button onclick="appendNumber('4')">4</button>
+                <button onclick="appendNumber('5')">5</button>
+                <button onclick="appendNumber('6')">6</button>
+                <button onclick="appendOperator('+')">+</button>
+                
+                <button onclick="appendNumber('1')">1</button>
+                <button onclick="appendNumber('2')">2</button>
+                <button onclick="appendNumber('3')">3</button>
+                <button onclick="appendOperator('%')">%</button>
+                
+                <button onclick="appendNumber('0')" style="grid-column: span 2;">0</button>
+                <button onclick="appendNumber('.')">.</button>
+                <button onclick="calculate()" class="equals">=</button>
+            </div>
         </div>
-    </header>
-
-    <main>
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <h1 class="hero-title">Xenon Calculator</h1>
-                    <p class="hero-subtitle">Advanced calculator with scientific functions and history</p>
-                    <div class="hero-buttons">
-                        <a href="https://github.com/xenon231tech/xenon-calculator" class="btn btn-primary">View on GitHub</a>
-                        <a href="https://github.com/xenon231tech/xenon-calculator/issues" class="btn btn-secondary">Report Issue</a>
-                    </div>
-                </div>
-                <div class="hero-icon">🧮</div>
-            </div>
-        </section>
-
-        <!-- Features Section -->
-        <section class="features" id="features">
-            <div class="container">
-                <h2>Key Features</h2>
-                <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">✓</div>
-                    <h3>Basic operations</h3>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">✓</div>
-                    <h3>Scientific functions</h3>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">✓</div>
-                    <h3>Calculation history</h3>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">✓</div>
-                    <h3>Unit conversion</h3>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">✓</div>
-                    <h3>Expression evaluation</h3>
-                </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section class="about" id="about">
-            <div class="container">
-                <h2>About This Project</h2>
-                <p>Advanced calculator with scientific functions and history</p>
-                <p>This project is part of the Xenon ecosystem - a collection of innovative applications and tools.</p>
-                <div class="project-stats">
-                    <div class="stat">
-                        <span class="stat-value" id="stars">-</span>
-                        <span class="stat-label">Stars</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-value" id="forks">-</span>
-                        <span class="stat-label">Forks</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-value" id="issues">-</span>
-                        <span class="stat-label">Issues</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="cta">
-            <div class="container">
-                <h2>Ready to Get Started?</h2>
-                <p>Explore the project on GitHub and start using Xenon Calculator today!</p>
-                <a href="https://github.com/xenon231tech/xenon-calculator" class="btn btn-primary btn-large">Go to GitHub</a>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2026 Xenon Projects. All rights reserved.</p>
-            <p>Created by <a href="https://github.com/xenon231tech">xenon231tech</a></p>
-        </div>
-    </footer>
-
+    </div>
     <script src="script.js"></script>
-    <script>
-        // Fetch GitHub stats
-        fetch('https://api.github.com/repos/xenon231tech/xenon-calculator')
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('stars').textContent = data.stargazers_count || 0;
-                document.getElementById('forks').textContent = data.forks_count || 0;
-                document.getElementById('issues').textContent = data.open_issues_count || 0;
-            })
-            .catch(error => console.log('Stats unavailable'));
-    </script>
 </body>
 </html>
