@@ -3,43 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xenon Calculator</title>
+    <meta name="description" content="Advanced Scientific Calculator with Modern Design">
+    <meta name="keywords" content="calculator, scientific, math, computation">
+    <title>Xenon Calculator Pro - Advanced Scientific Calculator</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="calc-container">
-        <h1>🧮 Xenon Calculator</h1>
-        <div class="calculator">
-            <div class="display">
-                <input type="text" id="display" readonly>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="title">🧮 Xenon Calculator Pro</h1>
+                <p class="subtitle">Advanced Scientific Calculator</p>
             </div>
-            <div class="buttons">
-                <button onclick="clearDisplay()">C</button>
-                <button onclick="appendOperator('/')">/</button>
-                <button onclick="appendOperator('*')">×</button>
-                <button onclick="deleteLast()">⌫</button>
-                
-                <button onclick="appendNumber('7')">7</button>
-                <button onclick="appendNumber('8')">8</button>
-                <button onclick="appendNumber('9')">9</button>
-                <button onclick="appendOperator('-')">−</button>
-                
-                <button onclick="appendNumber('4')">4</button>
-                <button onclick="appendNumber('5')">5</button>
-                <button onclick="appendNumber('6')">6</button>
-                <button onclick="appendOperator('+')">+</button>
-                
-                <button onclick="appendNumber('1')">1</button>
-                <button onclick="appendNumber('2')">2</button>
-                <button onclick="appendNumber('3')">3</button>
-                <button onclick="appendOperator('%')">%</button>
-                
-                <button onclick="appendNumber('0')" style="grid-column: span 2;">0</button>
-                <button onclick="appendNumber('.')">.</button>
-                <button onclick="calculate()" class="equals">=</button>
+            <div class="theme-toggle">
+                <button id="theme-btn" onclick="toggleTheme()">🌙</button>
             </div>
-        </div>
+        </header>
+
+        <!-- Main Calculator -->
+        <main class="main">
+            <div class="calculator-wrapper">
+                <!-- Display -->
+                <div class="display-section">
+                    <div class="display-history" id="history"></div>
+                    <input type="text" id="display" class="display" readonly placeholder="0">
+                </div>
+
+                <!-- Mode Selector -->
+                <div class="mode-selector">
+                    <button class="mode-btn active" data-mode="basic" onclick="switchMode('basic')">Basic</button>
+                    <button class="mode-btn" data-mode="scientific" onclick="switchMode('scientific')">Scientific</button>
+                    <button class="mode-btn" data-mode="programmer" onclick="switchMode('programmer')">Programmer</button>
+                </div>
+
+                <!-- Basic Mode -->
+                <div class="buttons-container basic-mode active-mode">
+                    <div class="button-grid">
+                        <button class="btn clear-btn" onclick="clearDisplay()">AC</button>
+                        <button class="btn operator-btn" onclick="toggleSign()">+/-</button>
+                        <button class="btn operator-btn" onclick="appendOperator('%')">%</button>
+                        <button class="btn operator-btn large" onclick="appendOperator('÷')">÷</button>
+
+                        <button class="btn number-btn" onclick="appendNumber('7')">7</button>
+                        <button class="btn number-btn" onclick="appendNumber('8')">8</button>
+                        <button class="btn number-btn" onclick="appendNumber('9')">9</button>
+                        <button class="btn operator-btn large" onclick="appendOperator('×')">×</button>
+
+                        <button class="btn number-btn" onclick="appendNumber('4')">4</button>
+                        <button class="btn number-btn" onclick="appendNumber('5')">5</button>
+                        <button class="btn number-btn" onclick="appendNumber('6')">6</button>
+                        <button class="btn operator-btn large" onclick="appendOperator('−')">−</button>
+
+                        <button class="btn number-btn" onclick="appendNumber('1')">1</button>
+                        <button class="btn number-btn" onclick="appendNumber('2')">2</button>
+                        <button class="btn number-btn" onclick="appendNumber('3')">3</button>
+                        <button class="btn operator-btn large" onclick="appendOperator('+')">+</button>
+
+                        <button class="btn number-btn" style="grid-column: span 2;" onclick="appendNumber('0')">0</button>
+                        <button class="btn number-btn" onclick="appendNumber('.')">.</button>
+                        <button class="btn equals-btn large" onclick="calculate()">=</button>
+                    </div>
+                </div>
+
+                <!-- Scientific Mode -->
+                <div class="buttons-container scientific-mode">
+                    <div class="button-grid">
+                        <button class="btn clear-btn" onclick="clearDisplay()">AC</button>
+                        <button class="btn operator-btn" onclick="toggleSign()">+/-</button>
+                        <button class="btn operator-btn" onclick="appendOperator('%')">%</button>
+                        <button class="btn operator-btn large" onclick="appendOperator('÷')">÷</button>
+
+                        <button class="btn function-btn" onclick="scientificFunc('sin')">sin</button>
+                        <button class="btn function-btn" onclick="scientificFunc('cos')">cos</button>
+                        <button class="btn function-btn" onclick="scientificFunc('tan')">tan</button>
+                        <button class="btn operator-btn large" onclick="appendOperator('×')">×</button>
+
+                        <button class="btn number-btn" onclick="appendNumber('7')">7</button>
+                        <button class="btn number-btn" onclick="appendNumber('8')">8</button>
+                        <button class="btn number-btn" onclick="appendNumber('9')">9</button>
+                        <button class="btn operator-btn large" onclick="appendOperator('−')">−</button>
+
+                        <button class="btn function-btn" onclick="scientificFunc('log')">log</button>
+                        <button class="btn function-btn" onclick="scientificFunc('ln')">ln</button>
+                        <button class="btn function-btn" onclick="scientificFunc('sqrt')">√</button>
+                        <button class="btn operator-btn large" onclick="appendOperator('+')">+</button>
+
+                        <button class="btn number-btn" onclick="appendNumber('4')">4</button>
+                        <button class="btn number-btn" onclick="appendNumber('5')">5</button>
+                        <button class="btn number-btn" onclick="appendNumber('6')">6</button>
+                        <button class="btn function-btn" onclick="scientificFunc('pow')">x^y</button>
+
+                        <button class="btn function-btn" onclick="scientificFunc('fact')">n!</button>
+                        <button class="btn function-btn" onclick="scientificFunc('pi')">π</button>
+                        <button class="btn function-btn" onclick="scientificFunc('e')">e</button>
+                        <button class="btn function-btn" onclick="scientificFunc('1/x')">1/x</button>
+
+                        <button class="btn number-btn" onclick="appendNumber('1')">1</button>
+                        <button class="btn number-btn" onclick="appendNumber('2')">2</button>
+                        <button class="btn number-btn" onclick="appendNumber('3')">3</button>
+                        <button class="btn equals-btn large" onclick="calculate()">=</button>
+
+                        <button class="btn number-btn" style="grid-column: span 2;" onclick="appendNumber('0')">0</button>
+                        <button class="btn number-btn" onclick="appendNumber('.')">.</button>
+                        <button class="btn operator-btn" onclick="deleteLast()">⌫</button>
+                    </div>
+                </div>
+
+                <!-- Programmer Mode -->
+                <div class="buttons-container programmer-mode">
+                    <div class="base-selector">
+                        <button class="base-btn active" data-base="10" onclick="switchBase(10)">DEC</button>
+                        <button class="base-btn" data-base="16" onclick="switchBase(16)">HEX</button>
+                        <button class="base-btn" data-base="8" onclick="switchBase(8)">OCT</button>
+                        <button class="base-btn" data-base="2" onclick="switchBase(2)">BIN</button>
+                    </div>
+                    <div class="button-grid">
+                        <button class="btn clear-btn" onclick="clearDisplay()">AC</button>
+                        <button class="btn operator-btn" onclick="appendOperator('&')">AND</button>
+                        <button class="btn operator-btn" onclick="appendOperator('|')">OR</button>
+                        <button class="btn operator-btn large" onclick="appendOperator('÷')">÷</button>
+
+                        <button class="btn number-btn" onclick="appendNumber('7')">7</button>
+                        <button class="btn number-btn" onclick="appendNumber('8')">8</button>
+                        <button class="btn number-btn" onclick="appendNumber('9')">9</button>
+                        <button class="btn operator-btn large" onclick="appendOperator('×')">×</button>
+
+                        <button class="btn number-btn" onclick="appendNumber('4')">4</button>
+                        <button class="btn number-btn" onclick="appendNumber('5')">5</button>
+                        <button class="btn number-btn" onclick="appendNumber('6')">6</button>
+                        <button class="btn operator-btn large" onclick="appendOperator('−')">−</button>
+
+                        <button class="btn number-btn" onclick="appendNumber('1')">1</button>
+                        <button class="btn number-btn" onclick="appendNumber('2')">2</button>
+                        <button class="btn number-btn" onclick="appendNumber('3')">3</button>
+                        <button class="btn operator-btn large" onclick="appendOperator('+')">+</button>
+
+                        <button class="btn number-btn" onclick="appendNumber('A')">A</button>
+                        <button class="btn number-btn" onclick="appendNumber('B')">B</button>
+                        <button class="btn number-btn" onclick="appendNumber('C')">C</button>
+                        <button class="btn function-btn" onclick="scientificFunc('lshift')"><<</button>
+
+                        <button class="btn number-btn" onclick="appendNumber('D')">D</button>
+                        <button class="btn number-btn" onclick="appendNumber('E')">E</button>
+                        <button class="btn number-btn" onclick="appendNumber('F')">F</button>
+                        <button class="btn function-btn" onclick="scientificFunc('rshift')">></button>
+
+                        <button class="btn number-btn" style="grid-column: span 2;" onclick="appendNumber('0')">0</button>
+                        <button class="btn number-btn" onclick="appendNumber('.')">.</button>
+                        <button class="btn equals-btn large" onclick="calculate()">=</button>
+                    </div>
+                </div>
+
+                <!-- Memory & History Controls -->
+                <div class="controls">
+                    <button class="ctrl-btn" onclick="memoryAdd()">M+</button>
+                    <button class="ctrl-btn" onclick="memorySubtract()">M−</button>
+                    <button class="ctrl-btn" onclick="memoryClear()">MC</button>
+                    <button class="ctrl-btn" onclick="memoryRecall()">MR</button>
+                    <button class="ctrl-btn" onclick="clearHistory()">Clear History</button>
+                </div>
+            </div>
+
+            <!-- History Panel -->
+            <div class="history-panel">
+                <h3>📋 Calculation History</h3>
+                <div class="history-list" id="historyList"></div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Xenon Calculator Pro © 2026 | Created by <a href="https://github.com/xenon231tech">xenon231tech</a></p>
+        </footer>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
